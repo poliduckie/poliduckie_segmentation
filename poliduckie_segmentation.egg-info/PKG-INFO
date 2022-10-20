@@ -12,7 +12,7 @@ Description: # poliduckie_segmentation
         
         ### Example
         ```python
-        from poliduckie_segmentation.poliduckie_segmentation import Segmentation
+        from poliduckie_segmentation.segmentation import Segmentation
         
         image = [...]
         segmentation = Segmentation()
