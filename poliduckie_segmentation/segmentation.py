@@ -4,7 +4,7 @@ try:
 except ImportError:
     import importlib_resources as pkg_resources
 
-from . import model
+# from poliduckie_segmentation import model
 
 IMG_WIDTH = 320
 IMG_HEIGHT = 240
@@ -12,9 +12,10 @@ IMG_CHANNELS = 3
 
 class Segmentation:
     def __init__(self):
-        model_path = pkg_resources.path(model, 'multiclass_segmentation_model')
-        self.model = tf.keras.models.load_model(model_path)
-        self.model.summary()
+        pass
+        # model_path = pkg_resources.path(model, 'multiclass_segmentation_model')
+        # self.model = tf.keras.models.load_model(model_path)
+        # self.model.summary()
 
     def predict(self, image):
         return self.model.predict(image.reshape((1,IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS)))

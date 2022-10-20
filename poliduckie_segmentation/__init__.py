@@ -1,4 +1,4 @@
-from tfest.tfest import tfest
+from poliduckie_segmentation.segmentation import Segmentation
 
 __version__ = '0.0.1'
 __author__ = 'PoliDuckies'
