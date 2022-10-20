@@ -3,7 +3,7 @@ A package ready to be installed that provides the segmentation work made by the 
 
 ### Example
 ```python
-from poliduckie_segmentation.poliduckie_segmentation import Segmentation
+from poliduckie_segmentation.segmentation import Segmentation
 
 image = [...]
 segmentation = Segmentation()
