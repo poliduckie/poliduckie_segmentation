@@ -7,5 +7,13 @@ from poliduckie_segmentation.segmentation import Segmentation
 
 image = [...]
 segmentation = Segmentation()
+
+# To predict:
 prediction = segmentation.predict(image)
+
+# To get the model:
+segmentation.get_model()
+
+# To get the model summary:
+segmentation.get_model_summary()
 ```
