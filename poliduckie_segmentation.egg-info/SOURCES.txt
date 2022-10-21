@@ -9,3 +9,7 @@ poliduckie_segmentation.egg-info/SOURCES.txt
 poliduckie_segmentation.egg-info/dependency_links.txt
 poliduckie_segmentation.egg-info/requires.txt
 poliduckie_segmentation.egg-info/top_level.txt
+poliduckie_segmentation/models/multiclass_segmentation_model/keras_metadata.pb
+poliduckie_segmentation/models/multiclass_segmentation_model/saved_model.pb
+poliduckie_segmentation/models/multiclass_segmentation_model/variables/variables.data-00000-of-00001
+poliduckie_segmentation/models/multiclass_segmentation_model/variables/variables.index
