@@ -1,6 +1,6 @@
 from poliduckie_segmentation.segmentation import Segmentation
 
-__version__ = '0.0.5'
+__version__ = '0.0.6'
 __author__ = 'PoliDuckies'
 __email__ = 'duckietown@aeapolimi.it'
 __license__ = 'MIT'

@@ -14,7 +14,7 @@ class Segmentation:
     def __init__(self):
         # can be done better with importlib.resources
         pkg_path = os.path.abspath(__file__)
-        model_path = os.path.join(os.path.dirname(pkg_path), 'models')
+        model_path = os.path.join(os.path.dirname(pkg_path), 'models', 'multiclass_segmentation_model')
         self.model = tf.keras.models.load_model(model_path)
         self.model.summary()
 
