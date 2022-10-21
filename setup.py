@@ -30,4 +30,5 @@ setuptools.setup(
   package_data = {
     'poliduckie_segmentation': ['*']
   },
+  include_package_data=True,
 )

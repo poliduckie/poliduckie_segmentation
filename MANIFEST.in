@@ -1,1 +1,2 @@
-include poliduckie_segmentation/models/*
+include *.pb
+recursive-include poliduckie_segmentation/models/ *
