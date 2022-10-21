@@ -13,8 +13,8 @@ setuptools.setup(
   long_description=README,
   author = 'Poliduckies',
   author_email = 'duckietown@aeapolimi.it',
-  url = 'github.com/poliduckies/poliduckie_segmentation',
-  download_url = 'https://github.com/poliduckies/poliduckie_segmentation/archive/refs/tags/v'+version+'-alpha.tar.gz',
+  url = 'https://github.com/poliduckie/poliduckie_segmentation',
+  # download_url = 'https://github.com/poliduckies/poliduckie_segmentation/archive/refs/tags/v'+version+'-alpha.tar.gz',
   keywords = ['segmentation', 'duckietown', 'tensorflow'],
   install_requires=[
           'tensorflow'

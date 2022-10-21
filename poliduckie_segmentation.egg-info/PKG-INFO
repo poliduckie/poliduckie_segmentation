@@ -2,11 +2,10 @@ Metadata-Version: 2.1
 Name: poliduckie-segmentation
 Version: 0.0.1
 Summary: Segmentation from the Poliduckie team.
-Home-page: github.com/poliduckies/poliduckie_segmentation
+Home-page: https://github.com/poliduckie/poliduckie_segmentation
 Author: Poliduckies
 Author-email: duckietown@aeapolimi.it
 License: MIT
-Download-URL: https://github.com/poliduckies/poliduckie_segmentation/archive/refs/tags/v0.0.1-alpha.tar.gz
 Description: # poliduckie_segmentation
         A package ready to be installed that provides the segmentation work made by the Poliduckie team
         
@@ -16,7 +15,15 @@ Description: # poliduckie_segmentation
         
         image = [...]
         segmentation = Segmentation()
+        
+        # To predict:
         prediction = segmentation.predict(image)
+        
+        # To get the model:
+        segmentation.get_model()
+        
+        # To get the model summary:
+        segmentation.get_model_summary()
         ```
         
 Keywords: segmentation,duckietown,tensorflow
