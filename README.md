@@ -1,7 +1,7 @@
 # poliduckie_segmentation
-A package ready to be installed that provides the segmentation work made by the Poliduckie team
+A package ready to be installed that provides the work made by the Poliduckie team
 
-### Example
+### Example for segmentation
 ```python
 from poliduckie_segmentation.segmentation import Segmentation
 
@@ -16,4 +16,16 @@ segmentation.get_model()
 
 # To get the model summary:
 segmentation.get_model_summary()
+
+```
+
+### Example for MPC
+```python
+from poliduckie_segmentation.control import MPC
+
+M = MPC()
+
+# x = state, r = reference (with N=10 be like r=[[0.1, 0.1]]*10)
+next_action = MPC(x, r)
+
 ```
