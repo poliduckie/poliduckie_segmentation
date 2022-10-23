@@ -17,7 +17,9 @@ setuptools.setup(
   # download_url = 'https://github.com/poliduckies/poliduckie_segmentation/archive/refs/tags/v'+version+'-alpha.tar.gz',
   keywords = ['segmentation', 'duckietown', 'tensorflow'],
   install_requires=[
-          'tensorflow'
+          'tensorflow',
+          'casadi',
+          'numpy'
       ],
   classifiers=[
     'Development Status :: 3 - Alpha',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
