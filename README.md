@@ -26,6 +26,6 @@ from poliduckie_segmentation.control import MPC
 M = MPC()
 
 # x = state, r = reference (with N=10 be like r=[[0.1, 0.1]]*10)
-next_action = MPC(x, r)
+next_action = M.mpc(x, r)
 
 ```
