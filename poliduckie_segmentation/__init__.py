@@ -1,6 +1,7 @@
 from poliduckie_segmentation.segmentation import Segmentation
+from poliduckie_segmentation.control import MPC
 
-__version__ = '0.0.6'
+__version__ = '0.0.8'
 __author__ = 'PoliDuckies'
 __email__ = 'duckietown@aeapolimi.it'
 __license__ = 'MIT'
