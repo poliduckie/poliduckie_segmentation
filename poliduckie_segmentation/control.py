@@ -27,6 +27,7 @@ class MPC:
         """
         if tr is None:
             Q2 = 0
+            tr = 0
         if u_delay is None:
             u_delay = self.u_delay0
         return self.model(x, r, tr, u_delay, Q1, Q2, Q3, R)
