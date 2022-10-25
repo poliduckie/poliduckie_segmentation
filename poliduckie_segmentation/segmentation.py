@@ -17,12 +17,13 @@ class Segmentation:
         model_path = os.path.join(os.path.dirname(pkg_path), 'models', 'multiclass_segmentation_model')
         self.model = tf.keras.models.load_model(model_path)
         self.model.summary()
+        self.verbose = verbose
 
     def predict(self, image):
-        return self.model.predict(image.reshape((1,IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS)), verbose=verbose)
+        return self.model.predict(image.reshape((1,IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS)), verbose=self.verbose)
 
     def predict_batch(self, images):
-        return self.model.predict(images.reshape((1,IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS)), verbose=verbose)
+        return self.model.predict(images.reshape((1,IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS)), verbose=self.verbose)
 
     def get_model(self):
         return self.model
