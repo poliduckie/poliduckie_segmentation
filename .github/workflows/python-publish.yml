@@ -33,6 +33,7 @@ jobs:
         pip install build twine
     - name: Build package
       run: |
+        pip install tensorflow
         python -m build
         twine upload dist/*
     - name: Publish package
