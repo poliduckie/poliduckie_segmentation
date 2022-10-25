@@ -1,4 +1,7 @@
 # poliduckie_segmentation
+[![PyPI version](https://badge.fury.io/py/poliduckie_segmentation.svg)](https://badge.fury.io/py/poliduckie_segmentation)
+
+
 A package ready to be installed that provides the work made by the Poliduckie team
 
 ### Example for segmentation
