@@ -24,10 +24,12 @@ class MPC:
         Q2: weight on angular error
         Q3: weight on max speed
         R: weight on control input
+        
+        returns: [left wheel speed, right wheel speed]
         """
         if tr is None:
             Q2 = 0
             tr = 0
         if u_delay is None:
             u_delay = self.u_delay0
-        return self.model(x, r, tr, u_delay, Q1, Q2, Q3, R)
+        return np.around(self.model(x, r, tr, u_delay, Q1, Q2, Q3, R).toarray().reshape(-1), 2)
