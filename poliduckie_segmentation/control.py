@@ -10,7 +10,6 @@ class MPC:
         self.model = ca.Function.load(model_path)
         self.delay = round(0.15/dt)
         self.u_delay0 = ca.DM(np.zeros((2, self.delay)))
-        self.wheel_speed = wheel_speed
 
     def get_model(self):
         return self.model
