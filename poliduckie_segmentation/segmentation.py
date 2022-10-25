@@ -11,7 +11,7 @@ IMG_HEIGHT = 240
 IMG_CHANNELS = 3
 
 class Segmentation:
-    def __init__(self):
+    def __init__(self, verbose=0):
         # can be done better with importlib.resources
         pkg_path = os.path.abspath(__file__)
         model_path = os.path.join(os.path.dirname(pkg_path), 'models', 'multiclass_segmentation_model')
@@ -19,10 +19,10 @@ class Segmentation:
         self.model.summary()
 
     def predict(self, image):
-        return self.model.predict(image.reshape((1,IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS)))
+        return self.model.predict(image.reshape((1,IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS)), verbose=verbose)
 
     def predict_batch(self, images):
-        return self.model.predict(images.reshape((1,IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS)))
+        return self.model.predict(images.reshape((1,IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS)), verbose=verbose)
 
     def get_model(self):
         return self.model
