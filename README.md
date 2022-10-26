@@ -43,4 +43,7 @@ x, y, theta = 0,0,0
 action = [1,1] # linear and angular speed
 next_state = F.step(x, y, theta, previous_speed, previous_angular_speed, action)
 
+# To use as action left and right wheel speed:
+F.step_wheel_speed(x, y, theta, previous_speed, previous_angular_speed, action)
+
 ```
