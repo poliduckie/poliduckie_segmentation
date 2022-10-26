@@ -16,7 +16,7 @@ class Model:
         linear_speed, angular_speed = action
         left_speed = (2*linear_speed - wheel_distance*angular_speed)/2
         right_speed = 2*linear_speed - left_speed
-        return self.model([x, y, theta, 0, 0], [left_speed, right_speed])
+        return self.model([x, y, theta, speed, angular_speed], [left_speed, right_speed])
     
     def step_wheel_speed(self, x, y, theta, speed, angular_speed, action):
-        return self.model([x, y, theta, 0, 0], action)
+        return self.model([x, y, theta, speed, angular_speed], action)
