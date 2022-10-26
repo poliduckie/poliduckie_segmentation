@@ -40,6 +40,7 @@ from poliduckie_segmentation.model import Model
 F = Model()
 
 x, y, theta = 0,0,0
-next_state = F.step(x, y, theta, previous_speed, previous_angular_speed)
+action = [1,1] # left and right wheels speed
+next_state = F.step(x, y, theta, previous_speed, previous_angular_speed, action)
 
 ```
