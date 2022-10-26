@@ -32,3 +32,14 @@ M = MPC()
 next_action = M.mpc(x, r)
 
 ```
+
+### Example for Model
+```python
+from poliduckie_segmentation.control import Model
+
+F = Model()
+
+x, y, theta = 0,0,0
+next_state = F.step(x, y, theta, previous_speed, previous_angular_speed)
+
+```
