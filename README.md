@@ -35,7 +35,7 @@ next_action = M.mpc(x, r)
 
 ### Example for Model
 ```python
-from poliduckie_segmentation.control import Model
+from poliduckie_segmentation.model import Model
 
 F = Model()
 
