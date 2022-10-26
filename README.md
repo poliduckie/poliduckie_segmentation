@@ -5,7 +5,7 @@
 A package ready to be installed that provides the work made by the Poliduckie team
 
 ```
-pip install poliduckie_segmentation
+pip install poliduckie-segmentation
 ```
 
 ### Example for segmentation
