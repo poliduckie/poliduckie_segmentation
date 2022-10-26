@@ -12,5 +12,11 @@ class Model:
     def get_model(self):
         return self.model
       
-    def step(self, x, y, theta, speed, angular_speed, action):
+    def step(self, x, y, theta, speed, angular_speed, action, wheel_distance=0.10467):
+        linear_speed, angular_speed = action
+        left_speed = (2*linear_speed - wheel_distance*angular_speed)/2
+        right_speed = 2*linear_speed - left_speed
+        return self.model([pose.x, pose.y, pose.theta, 0, 0], [left_speed, right_speed])
+    
+    def step_wheel_speed(self, x, y, theta, speed, angular_speed, action):
         return self.model([pose.x, pose.y, pose.theta, 0, 0], action)
