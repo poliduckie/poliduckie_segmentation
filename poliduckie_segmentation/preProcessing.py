@@ -20,5 +20,5 @@ class BirdEyeView():
         self.Matrix = pickle.load(file)
         pass
 
-    def computeBirdEye(self, img):
+    def computeBirdEye(self,img):
         return cv2.warpPerspective(img, self.Matrix, img.shape[:2][::-1])

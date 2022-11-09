@@ -1,5 +1,6 @@
 from poliduckie_segmentation.segmentation import Segmentation
 from poliduckie_segmentation.control import MPC
+from poliduckie_segmentation import BirdEyeView
 
 __version__ = '0.1.6'
 __author__ = 'PoliDuckies'
