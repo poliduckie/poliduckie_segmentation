@@ -30,8 +30,8 @@ jobs:
         pip install tensorflow
         pip install casadi
         pip install numpy
+        pip install opencv-python
         pip install build
-        pip install cv2
     - name: Build package
       run: |
         python -m build --no-isolation
