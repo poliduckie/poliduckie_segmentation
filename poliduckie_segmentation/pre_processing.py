@@ -16,7 +16,7 @@ class BirdEyeView():
 
     def __init__(self):
         pkg_path = os.path.abspath(__file__)
-        model_path = os.path.join(os.path.dirname(pkg_path), 'BirdEyeCalibration', 'BirdEye.pkl')
+        model_path = os.path.join(os.path.dirname(pkg_path), 'BirdEyeCalibration', 'BirdEyeMatrix.pkl')
         file = open(model_path, 'rb')
         self.Matrix = pickle.load(file)
         pass
