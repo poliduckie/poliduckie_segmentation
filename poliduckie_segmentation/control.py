@@ -4,9 +4,9 @@ import casadi as ca
 import numpy as np
 
 class MPC:
-    def __init__(self, dt=10):
+    def __init__(self, dt=10, N=2):
         pkg_path = os.path.abspath(__file__)
-        model_path = os.path.join(os.path.dirname(pkg_path), 'models', 'mpc_model', 'MPC.casadi')
+        model_path = os.path.join(os.path.dirname(pkg_path), 'models', 'mpc_model', f'MPC_N{N}.casadi')
         self.model = ca.Function.load(model_path)
         self.delay = round(0.15/dt)
         self.u_delay0 = ca.DM(np.zeros((2, self.delay)))
