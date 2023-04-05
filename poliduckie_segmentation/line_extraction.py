@@ -33,24 +33,11 @@ class LineExtraction:
         labels = kmeans.labels_
         centroids = kmeans.cluster_centers_
 
-        # remove centroids that are too close to each other
-        centroids = np.unique(centroids, axis=0)
-
         # remove centroids with too few points
         newCentroids = []
         for i in range(centroids.shape[0]):
             if np.sum(labels == i) >= LineExtraction.MIN_ENTRIES:
                 newCentroids.append(centroids[i])
-        centroids = np.array(newCentroids)
-
-        # remove centroids that are too distant from each other
-        newCentroids = []
-        for i in range(centroids.shape[0]):
-            if i == 0:
-                newCentroids.append(centroids[i])
-            else:
-                if np.linalg.norm(centroids[i] - centroids[i-1]) < LineExtraction.MAX_DISTANCE:
-                    newCentroids.append(centroids[i])
         centroids = np.array(newCentroids)
 
         return centroids
@@ -60,7 +47,19 @@ class LineExtraction:
         pca.fit(centroids)
         return pca.transform(centroids), pca
 
-    def extract_centroids(self, img):
+    def filter_centroids(centroids):
+        # remove centroids that are too distant from each other
+        newCentroids = []
+        for i in range(centroids.shape[0]):
+            if i == 0:
+                newCentroids.append(centroids[i])
+            else:
+                if np.linalg.norm(centroids[i] - centroids[i-1]) < LineExtraction.MAX_DISTANCE:
+                    newCentroids.append(centroids[i])
+
+        return np.array(newCentroids)
+
+    def extract_centroids(self, img, usePCA=True):
         # Extract non zero points
         points = np.argwhere(img > 0)
         points = np.fliplr(points)
@@ -71,18 +70,31 @@ class LineExtraction:
 
         # Get centroids
         centroids = LineExtraction.getCentroids(points)
-        # sort the centroids by their y coordinate
-        centroids = centroids[np.argsort(centroids[:, 1])]
 
-        # Rotate the centroids
-        pcaCentroids, pca = self.PCAreduce(centroids)
+        if usePCA:
+            # Rotate the centroids
+            pcaCentroids, pca = self.PCAreduce(centroids)
 
-        # sort the centroids by their x coordinate
-        pcaCentroids = pcaCentroids[np.argsort(pcaCentroids[:, 0])]
+            # sort the centroids by their x coordinate
+            pcaCentroids = pcaCentroids[np.argsort(pcaCentroids[:, 0])]
 
-        x, y = centroids[:, 0], centroids[:, 1]
+            # filter centroids
+            pcaCentroids = LineExtraction.filter_centroids(pcaCentroids)
 
-        return x, y, pca
+            # Get the x and y coordinates
+            x, y = pcaCentroids[:, 0], pcaCentroids[:, 1]
+
+        else:
+            # sort the centroids by their y coordinate
+            centroids = centroids[np.argsort(centroids[:, 1])]
+
+            # filter centroids
+            centroids = LineExtraction.filter_centroids(centroids)
+
+            # If PCA is not used, return the original centroids
+            x, y = centroids[:, 0], centroids[:, 1]
+
+        return x, y, pca if usePCA else None
 
     def get_bezier_parameters(X, Y, degree=3):
         """ Least square qbezier fit using penrose pseudoinverse.
@@ -127,7 +139,7 @@ class LineExtraction:
         final = least_square_fit(points, M).tolist()
         final[0] = [X[0], Y[0]]
         final[len(final)-1] = [X[len(X)-1], Y[len(Y)-1]]
-        return final
+        return np.array(final)
 
     def bernstein_poly(i, n, t):
         """
@@ -162,24 +174,30 @@ class LineExtraction:
         yvals = np.dot(yPoints, polynomial_array)
         return np.array([xvals, yvals])
 
-    def bezier_fit(self, img, degree=5, nPoints=100):
-        x, y, pca = self.extract_centroids(img)
+    def bezier_fit(self, img, degree=5, nPoints=100, usePCA=False):
+        x, y, pca = self.extract_centroids(img, usePCA=usePCA)
 
         controls = LineExtraction.get_bezier_parameters(x, y, degree=degree)
 
+        if usePCA:
+            controls = pca.inverse_transform(np.array(controls))
+
         bpoints = LineExtraction.bezier_curve(controls, nTimes=nPoints)
-        # bpoints_inversePCA = pca.inverse_transform(np.array(bpoints).T).T
 
         return bpoints
 
-    def spline_interpolation(self, img, nPoints=100):
-        y, x, pca = self.extract_centroids(img)
+    def spline_interpolation(self, img, nPoints=100, usePCA=False):
+        y, x, pca = self.extract_centroids(img, usePCA)
+
+        if usePCA:
+            x, y = y, x
 
         tck = splrep(x, y)
         xnew = np.linspace(min(x), max(x), nPoints)
         ynew = splev(xnew, tck)
 
-        # pca.inverse_transform(np.array([xnew, ynew]).T).T
+        if usePCA:
+            ynew, xnew = pca.inverse_transform(np.array([xnew, ynew]).T).T
         return np.array([ynew, xnew])
 
 
@@ -193,8 +211,8 @@ if __name__ == '__main__':
 
     # Extract lines
     lineExtraction = LineExtraction()
-    bezier_lines = lineExtraction.bezier_fit(img)
-    spline_lines = lineExtraction.spline_interpolation(img)
+    bezier_lines = lineExtraction.bezier_fit(img, usePCA=False)
+    spline_lines = lineExtraction.spline_interpolation(img, usePCA=False)
 
     plt.imshow(img, cmap='gray')
     plt.plot(bezier_lines[0], bezier_lines[1],
