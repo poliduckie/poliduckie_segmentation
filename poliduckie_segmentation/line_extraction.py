@@ -29,7 +29,8 @@ class LineExtraction:
 
     def getCentroids(points):
         # K means clustering
-        kmeans = KMeans(n_clusters=LineExtraction.N_CLUSTERS).fit(points)
+        kmeans = KMeans(n_clusters=LineExtraction.N_CLUSTERS,
+                        n_init=10).fit(points)
         labels = kmeans.labels_
         centroids = kmeans.cluster_centers_
 
